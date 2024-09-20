@@ -1,0 +1,14 @@
+import phonenumbers
+from phonenumbers import geocoder
+import folium
+def location(phone_number):
+    parsed_number=phonenumbers.parse(phone_number)
+    location=geocoder.description_for_number(parsed_number,"en")
+    map=folium.Map(location=[20,0],zoom_start=2)
+    folium.Marker([20,0],popup=location).add_to(map)
+    map.save("phonenumbers.html")
+    return{
+        "phonenumber":phone_number,
+        "location":location
+    }
+print=(location(+92226565140))
